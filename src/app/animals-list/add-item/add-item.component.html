@@ -1,0 +1,142 @@
+<div class="addItem__container">
+
+  <form
+    class="addItem__form"
+    #f="ngForm"
+    (ngSubmit)="onSubmit(f)"
+  >
+<div class="addItem__outCon">
+    <div class="addItem__inCon">
+      <p>
+        <mat-radio-group
+          aria-labelledby="radio__label"
+          class="radio__group"
+          required
+          ngModel
+          name="form_breed">
+          <label id="radio__label">جنسیت:</label>
+          <mat-radio-button class="radio__button" value="male">مذکر</mat-radio-button>
+          <mat-radio-button class="radio__button" value="female">مونث</mat-radio-button>
+        </mat-radio-group>
+      </p>
+      <p>
+        <mat-form-field
+          appearance="outline"
+          class="formField">
+          <mat-label>نژاد حیوان</mat-label>
+          <input type="text"
+                 matInput
+                 placeholder="نژاد"
+                 ngModel
+                 name="breed"
+                 #breedInput="ngModel"
+                 required >
+          <mat-error *ngIf="breedInput.hasError('required')">ورود نژاد الزامی است</mat-error>
+          <mat-error *ngIf="!breedInput.hasError('required')">نژاد نامتعبر است</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field
+          appearance="outline"
+          class="formField">
+          <mat-label>اسم (اختیاری)</mat-label>
+          <input type="text"
+                 matInput
+                 placeholder="اسم"
+                 ngModel
+                 name="name"
+                 #nameInput="ngModel" >
+          <mat-error *ngIf="breedInput.hasError('required')">ورود نام الزامی است</mat-error>
+          <mat-error *ngIf="!breedInput.hasError('required')">نام نامتعبر است</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-checkbox
+          name="vaccination"
+          ngModel
+          style="padding: 5px 0;">واکسیناسیون</mat-checkbox>
+      </p>
+      <fieldset
+        class="addItem__ageField"
+        fxLayoutAlign="row"
+        fxLayoutGap="20px">
+
+        <legend>تعیین سن</legend>
+
+        <mat-form-field class="formField--date">
+          <mat-label>روز</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="روز"
+            ngModel
+            name="age_day"
+            #age_day="ngModel"
+            min="0"
+            max="30" >
+        </mat-form-field>
+
+        <mat-form-field class="formField--date">
+          <mat-label>ماه</mat-label>
+          <input maxlength="20px"
+                 type="number"
+                 matInput
+                 placeholder="ماه"
+                 ngModel
+                 name="age_month"
+                 #age_month="ngModel"
+                 min="0"
+                 max="12"
+                 required >
+        </mat-form-field>
+
+        <mat-form-field class="formField--date">
+          <mat-label>سال</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="سال"
+            ngModel
+            name="age_year"
+            #age_year="ngModel"
+            min="0"
+            max="20"
+            required >
+        </mat-form-field>
+      </fieldset>
+    </div>
+      <div  class="uploadImg">
+        <input
+          type="file"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+          id="uploadImg__input"
+          hidden
+        >
+        <label
+          for="uploadImg__input"
+          class="uploadImg__label">
+          انتخاب تصویر
+          <mat-icon class="uploadImg__icon">cloud_upload</mat-icon>
+        </label>
+        <mat-progress-bar
+          *ngIf="showProgressbar"
+          class="uploadImg__progress"
+          mode="determinate" [value]="uploadPercent | async"></mat-progress-bar>
+        <div class="uploadImg__preview" *ngIf="url">
+          <img class="uploadImg__img" [src]="url">
+        </div>
+      </div>
+</div>
+
+      <button
+        mat-raised-button
+        color="warn"
+        type="submit"
+        class="submit__btn"
+        [disabled]="f.invalid" >ثبت
+      </button>
+
+  </form>
+
+</div>

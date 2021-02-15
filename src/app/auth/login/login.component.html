@@ -1,0 +1,64 @@
+<section class="login__container">
+  <div class="login__form">
+    <form
+      *ngIf="!isLoading"
+      class="form"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      #f="ngForm"
+      (ngSubmit)="onSubmit(f)"
+      fxLayoutGap="10px" >
+      <h1>ورود کاربران</h1>
+      <mat-form-field>
+        <input type="email"
+               matInput
+               placeholder="آدرس ایمیل"
+               ngModel
+               name="email"
+               email
+               #emailInput="ngModel"
+               required >
+        <mat-error *ngIf="emailInput.hasError('required')">ورود ایمیل الزامی است</mat-error>
+        <mat-error *ngIf="!emailInput.hasError('required')">ایمیل نامتعبر است</mat-error>
+      </mat-form-field>
+      <mat-form-field hintLabel="حداقل 6 کاراکتر">
+        <input type="password"
+               matInput
+               placeholder="رمز عبور"
+               ngModel
+               name="password"
+               minlength="6"
+               #pwInput="ngModel"
+               required >
+        <mat-hint align="end">{{pwInput.value?.length}}/6</mat-hint>
+      </mat-form-field>
+
+      <button
+        mat-button
+        color="accent"
+        class="login__passRecovery"
+        (click)="onForgotPassword()" >بازیابی رمز عبور > </button>
+
+      <div class="login__actions">
+        <button
+          type="submit"
+          mat-raised-button
+          color="accent"
+          [disabled]="f.invalid || isLoading " > ورود </button>
+
+        <button
+          mat-button
+          color="primary"
+          class="login__passRecovery"
+          (click)="onCreateAccount()" > ایجاد حساب کاربری </button>
+      </div>
+
+
+    </form>
+  </div>
+
+
+  <div class="login__spinner">
+    <mat-spinner color="accent" *ngIf="isLoading"></mat-spinner>
+  </div>
+</section>

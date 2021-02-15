@@ -1,0 +1,26 @@
+$breakpoints:(
+'phone': 0px,
+'tablet-portrait': 481px,
+'tablet-landscape': 769px,
+'desktop':600px,
+'big-desktop': 1920px
+)!default;
+
+$breakpointss:(
+  'phone': 599px,
+  //'tablet-portrait': 1280px,
+  //'tablet-landscape': 769px,
+  'desktop':5000px,
+  'big-desktop': 1920px
+)!default;
+
+@mixin screen($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint){
+    @media (min-width: map-get($breakpoints,$breakpoint)) and (max-width: map-get($breakpointss,$breakpoint)){
+      @content;
+    }
+  }
+  @else {
+    @warn " `#{$breakpoint}` can not be found. ";
+  }
+}

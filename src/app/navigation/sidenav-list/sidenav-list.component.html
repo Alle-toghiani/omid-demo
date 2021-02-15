@@ -1,0 +1,47 @@
+  <mat-nav-list  fxFlex fxLayout="column" fxLayoutGap="20px">
+
+    <div fxHide.gt-xs fxFlex fxLayoutAlign="center" fxLayoutGap="5px">
+      <button
+        *ngIf="true"
+        mat-raised-button
+        color="accent"
+        routerLink="/login"
+        fxFlexAlign="center"
+        style="height: fit-content"
+      >ورود کاربران</button>
+      <button *ngIf="false" (click)="onLogOut()" mat-stroked-button  fxFlexAlign="center" style="height: fit-content">خروج</button>
+      <mat-divider></mat-divider>
+    </div>
+
+    <div>
+      <a mat-list-item href="#"
+         class="header__menu-btn"
+         (click)="onClose()"
+         routerLink="/animals-list"
+      >
+        <mat-icon>list</mat-icon>
+        <span class="nav-caption">لیست حیوانات</span>
+      </a>
+
+      <a mat-list-item href="#" class="header__menu-btn" (click)="onClose()">
+        <mat-icon>attach_money</mat-icon>
+        <span class="nav-caption">حمایت مالی</span>
+      </a>
+
+      <a mat-list-item href="#" class="header__menu-btn" (click)="onClose()">
+        <mat-icon>groups</mat-icon>
+        <span class="nav-caption">همکاری</span>
+      </a>
+
+      <a mat-list-item href="#" class="header__menu-btn" (click)="onClose()">
+        <mat-icon>shopping_cart</mat-icon>
+        <span class="nav-caption">فروشگاه</span>
+      </a>
+
+      <a mat-list-item href="#" class="header__menu-btn" (click)="onClose()">
+        <mat-icon>place</mat-icon>
+        <span class="nav-caption">ارتباط با ما</span>
+      </a>
+    </div>
+
+  </mat-nav-list>

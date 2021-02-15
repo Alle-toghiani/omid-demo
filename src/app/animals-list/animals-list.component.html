@@ -1,0 +1,112 @@
+<div class="outer-container">
+
+  <div class="sideNav-container" fxHide.lt-md >
+    <div class="sideNav-sort">
+      <h3>ترتیب نمایش</h3>
+      <mat-button-toggle-group #group="matButtonToggleGroup">
+        <mat-button-toggle value="ascending ">
+          <span>صعودی  </span>
+          <i class="fas fa-sort-amount-down-alt"></i>
+        </mat-button-toggle>
+        <mat-button-toggle value="descending">
+          <span>نزولی  </span>
+          <i class="fas fa-sort-amount-down"></i>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+      <br>
+      <br>
+        <mat-form-field appearance="fill">
+          <mat-label>بر اساس</mat-label>
+          <mat-select>
+            <mat-option value="age">سن</mat-option>
+            <mat-option value="option">زمان</mat-option>
+          </mat-select>
+        </mat-form-field>
+      <mat-divider></mat-divider>
+      <h3>فیلتر نتایج</h3>
+    </div>
+  </div>
+
+  <div class="list__container">
+    <div class="list__actions" fxHide.gt-sm >
+<!--        <a class="list__actions&#45;&#45;action" (click)="openDialog()" >-->
+<!--          <mat-icon>add</mat-icon>-->
+<!--          <span>افزودن آیتم جدید</span>-->
+<!--        </a>-->
+      <button
+        mat-stroked-button
+        class="list__actions--action"
+        color="primary"
+        (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+        افزودن آیتم جدید
+      </button>
+      <button
+        mat-stroked-button
+        class="list__actions--action"
+        color="primary"
+        (click)="openDialog()">
+        <mat-icon>filter_alt</mat-icon>
+        فیلتر و جستوجو
+      </button>
+<!--        <a class="list__actions&#45;&#45;action" (click)="openDialog()" >-->
+<!--          <mat-icon>filter_alt</mat-icon>-->
+<!--          <span>فیلتر و ترتیب</span>-->
+<!--        </a>-->
+    </div>
+  <div class="item__container">
+    <div *ngFor="let item of animalsList " class="item" fxHide.gt-xs>
+      <div class="item__image">
+        <img [src]="item.imageAddress" alt="Photo of a Shiba Inu" class="item__image">
+      </div>
+      <div class="item__details">
+        <span *ngIf="item.name"><strong>اسم: </strong>{{item.name}}  </span>
+        <span> <strong>نژاد: </strong>{{item.breed}}  </span>
+        <span><strong>سن: </strong>{{item.birthDate | datetostring}}  </span>
+        <span *ngIf="item.vaccination"> <strong>واکسیناسیون:</strong> <mat-icon>check</mat-icon></span>
+        <span *ngIf="!item.vaccination"> <strong>واکسیناسیون:</strong><mat-icon>close</mat-icon></span>
+      </div>
+      <div class="item__actions">
+        <button mat-stroked-button color="warn">حذف</button>
+        <button mat-stroked-button color="primary">سرپرستی</button>
+      </div>
+    </div>
+
+
+
+    <div  *ngFor="let item of animalsList " class="card" fxHide.lt-sm>
+      <mat-card class="example-card" >
+        <mat-card-header>
+          <mat-card-title>{{ item.breed }}</mat-card-title>
+          <mat-card-subtitle>{{item.gender}} </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.imageAddress" alt="Photo of a Shiba Inu" class="card-image">
+        <mat-card-content>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="warn">سرپرستی</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  </div>
+
+  <p fxHide.lt-md (click)="openDialog()">
+    <span title="اضافه کردن آیتم جدید">
+      <button
+        class="outer-container__btn"
+        mat-fab color="accent" >
+        <mat-icon>
+          add_circle_outline
+        </mat-icon>
+      </button>
+    </span>
+  </p>
+
+</div>
+
+
+
+
+

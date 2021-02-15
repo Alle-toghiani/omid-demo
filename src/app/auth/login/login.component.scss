@@ -1,0 +1,38 @@
+mat-form-field{
+  width: 300px;
+}
+.form{
+  background-color: white;
+  display: block;
+  width: 350px;
+  padding:2em;
+  margin-top: 3em;
+  margin-bottom: 2em;
+  border-radius: 5px;
+}
+mat-form-field {
+  padding: 10px;
+}
+
+.login{
+  &__container{
+
+    display: flex;
+    flex-flow: column nowrap;
+    flex-grow: 1;
+    align-items: center;
+  }
+  &__spinner{
+    margin:4em;
+  }
+
+  &__passRecovery{
+    align-self: flex-start;
+  }
+
+  &__actions{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}

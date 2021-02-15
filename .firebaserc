@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "omid-shelter": {
+      "hosting": {
+        "test-project": [
+          "omid-shelter"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "omid-shelter"
+  }
+}

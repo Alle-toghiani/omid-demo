@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyChBQWVSYQVAiUBWYSNBlUBa6O40YMHCUc",
+    authDomain: "omid-shelter.firebaseapp.com",
+    databaseURL: "https://omid-shelter.firebaseio.com",
+    projectId: "omid-shelter",
+    storageBucket: "omid-shelter.appspot.com",
+    messagingSenderId: "372885562625",
+
+  }
 };
 
 /*

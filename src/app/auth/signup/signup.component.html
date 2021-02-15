@@ -1,0 +1,70 @@
+<section class="signup__container">
+
+  <div class="signup__form">
+
+    <form
+      *ngIf="!isLoading"
+      class="form"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      #f="ngForm"
+      (ngSubmit)="onSubmit(f)"
+      fxLayoutGap="10px" >
+      <h1>ثبت نام</h1>
+      <mat-form-field>
+        <input type="email"
+               matInput
+               placeholder="آدرس ایمیل"
+               ngModel
+               name="email"
+               email
+               #emailInput="ngModel"
+               required >
+        <mat-error *ngIf="emailInput.hasError('required')">ورود ایمیل الزامی است</mat-error>
+        <mat-error *ngIf="!emailInput.hasError('required')">ایمیل نامتعبر است</mat-error>
+      </mat-form-field>
+
+      <mat-form-field hintLabel="حداقل 6 کاراکتر">
+        <input type="password"
+               matInput
+               placeholder="رمز عبور"
+               ngModel
+               name="password"
+               minlength="6"
+               #pwInput="ngModel"
+               required >
+        <mat-hint align="end">{{pwInput.value?.length}}/6</mat-hint>
+      </mat-form-field>
+
+      <div class="signup__agreement">
+        <mat-checkbox
+          labelPosition="after"
+          ngModel
+          name="agreement"
+          required>
+          <span (click)="onWhatAreTheRules()" >قوانین را خوانده ام و قبول دارم</span>
+        </mat-checkbox>
+      </div>
+
+      <div class="signup__actions">
+
+        <button type="submit"
+                mat-raised-button
+                color="accent"
+                class="signup__submit"
+                [disabled]="f.invalid || isLoading " > ثبت نام </button>
+        <button
+                mat-button
+                color="primary"
+                class="signup__login"
+                (click)="onSwitchToLogin()"
+        > ورود کاربران </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="signup__spinner">
+    <mat-spinner color="accent" *ngIf="isLoading"></mat-spinner>
+  </div>
+
+</section>

@@ -1,0 +1,65 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <mat-nav-list>
+        <a mat-list-item href="#" class="header__menu-btn" (click)="sidenav.close()">
+          <mat-icon>attach_money</mat-icon>
+          <span class="nav-caption">حمایت مالی</span>
+        </a>
+        <a mat-list-item href="#" class="header__menu-btn" (click)="sidenav.close()">
+          <mat-icon>groups</mat-icon>
+          <span class="nav-caption">همکاری</span>
+        </a>
+        <a mat-list-item href="#" class="header__menu-btn" (click)="sidenav.close()">
+          <mat-icon>shopping_cart</mat-icon>
+          <span class="nav-caption">فروشگاه</span>
+        </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <div fxHide.gt-xs>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon color="accent">menu</mat-icon>
+        </button>
+      </div>
+      <div class="header__navbar">
+
+        <ul class="header__menu">
+          <li>
+            <mat-icon>home</mat-icon>
+            <a routerLink="/signup" class="header__menu-btn">درباره امید</a>
+          </li>
+          <li>
+            <mat-icon>list</mat-icon>
+            <a routerLink="/login" class="header__menu-btn">لیست حیوانات</a>
+          </li>
+          <li fxHide.xs >
+            <mat-icon>attach_money</mat-icon>
+            <a href="#" class="header__menu-btn">حمایت مالی</a>
+          </li>
+          <li fxHide.xs >
+            <mat-icon>groups</mat-icon>
+            <a href="#" class="header__menu-btn"> همکاری</a>
+          </li>
+          <li fxHide.xs >
+            <mat-icon>shopping_cart</mat-icon>
+            <a href="#" class="header__menu-btn">فروشگاه</a>
+          </li>
+          <li>
+            <mat-icon>place</mat-icon>
+            <a href="#" class="header__menu-btn">ارتباط با ما</a>
+          </li>
+        </ul>
+      </div>
+      <div fxHide.lt-md fxFlex fxLayout fxLayoutAlign="flex-end">
+        <img
+          class="header__logo"
+          src="../../assets/img/logo/omid-animal-logo300-70.png"
+          alt="Omid organization logo"
+          style=" margin-left: 0;display: block;">
+
+      </div>
+    </mat-toolbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>
