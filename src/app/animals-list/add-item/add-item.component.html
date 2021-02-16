@@ -6,6 +6,7 @@
     (ngSubmit)="onSubmit(f)"
   >
 <div class="addItem__outCon">
+
     <div class="addItem__inCon">
       <p>
         <mat-radio-group
@@ -105,6 +106,7 @@
         </mat-form-field>
       </fieldset>
     </div>
+
       <div  class="uploadImg">
         <input
           type="file"
@@ -126,7 +128,12 @@
         <div class="uploadImg__preview" *ngIf="url">
           <img class="uploadImg__img" [src]="url">
         </div>
+        <div style="width: 2em; height: 3em; background-color: red">sdfsdf</div>
+
       </div>
+
+
+
 </div>
 
       <button

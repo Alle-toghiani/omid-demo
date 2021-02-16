@@ -3,10 +3,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from "firebase";
 import Firestore = firebase.firestore.Firestore;
 import {map} from "rxjs/operators";
-import {Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import { AuthService } from "../auth/auth.service";
 import {animalModel} from "./animal.model";
-
+import { nanoid } from "nanoid";
+import {AngularFireStorage} from "@angular/fire/storage";
 
 @Injectable()
 
@@ -14,7 +15,8 @@ export class AnimalsServcice {
 
   constructor(
     private firestore: AngularFirestore,
-    private authService: AuthService) {}
+    private authService: AuthService,
+    private fireStorage: AngularFireStorage) {}
 
   private animalsList: animalModel[] = [];
   private animalsOfflineList: animalModel[] = [
@@ -79,6 +81,9 @@ export class AnimalsServcice {
 
   animalsListChanged = new Subject<animalModel[]>();
 
+  uploadProgress: Observable<number>;
+  downloadURL: Observable<string>;
+
   getAnimalsList(){
     return this.animalsList.slice();
   }
@@ -118,31 +123,66 @@ export class AnimalsServcice {
 
   }
 
-  pushDataToCloudFireStore( item: animalModel){
+
+
+  async onUploadData( animalModel: animalModel, fileRef){
+    let model : animalModel = animalModel;
+    const generatedID = nanoid();
+    const downloadURL = await this.pushDataToFireStorage(fileRef,generatedID);
+
+    model.imageAddress =  downloadURL.toString();
+
+    console.log("model",model);
+
+    this.pushDataToCloudFireStore(model, generatedID)
+
+  }
+
+  pushDataToFireStorage( fileRef, generatedID ){
+    return new Promise((resolve,reject) => {
+
+      let selectedFile = fileRef
+
+      const storagePath = 'privateData/images/' + generatedID + '/' + generatedID;
+
+      const ref = this.fireStorage.ref(storagePath);
+
+
+      ref.put(selectedFile).then( (snapshot)=>{
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "%done");
+      })
+        .then(()=>{
+          ref.getDownloadURL().subscribe( (url) =>{
+            resolve(url)
+        })
+      })
+      })
+
+      // const task = ref.put(selectedFile)
+      //
+      // const taskCompleted = () => {
+      //   task.task.snapshot.ref.getDownloadURL().then(resolve).catch(reject);
+      // }
+      //
+      // this.uploadProgress = task.percentageChanges();
+    // })
+
+  }
+
+  pushDataToCloudFireStore( dataObject: animalModel, generatedID){
     if (this.authService.userIsAdmin()){
-      this.firestore.collection('publicData')
-        .add(item)
+      this.firestore.collection('publicData').doc(generatedID)
+        .set(dataObject)
         .then(response => {
-          console.log("response",response.id);
+          console.log("response",response);
         }).catch(error => {
-          console.log("error",error);
+        console.log("error",error);
       })
     }
   }
 
-  onUploadData(animalModel: animalModel, fileRef){
 
-  }
-
-  pushDataToFireStorage( fileRef ){
-
-    let selectedFile = <File>fileRef.target.files[0];
-
-  }
-
-  generateID(){
-    const createId = Math.floor(Math.random() * 100000000);
-  }
 
 
 

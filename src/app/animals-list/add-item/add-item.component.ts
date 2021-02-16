@@ -41,37 +41,40 @@ export class AddItemComponent implements OnInit {
 
     const uploadObject :animalModel = {
       id: createId,
-      gender: form.value.form_breed,
+      gender: form.value.gender,
       breed: form.value.breed,
       birthDate: input_age,
-      // imageAddress: this.imgSrc,
+      imageAddress: '',
       vaccination: form.value.vaccination,
       dateAdded: new Date()
     }
-    this.AnimalsServcice.pushDataToCloudFireStore(uploadObject);
+    this.AnimalsServcice.onUploadData(uploadObject,this.selectedFile);
+    // this.AnimalsServcice.pushDataToCloudFireStore(uploadObject);
     //this.storage.upload("/files"+Math.random()+this.path,this.path)
   }
 
   onFileSelected(event) {
 
-
     this.selectedFile = <File>event.target.files[0];
-    const createId = Math.floor(Math.random() * 1000000);
-    console.log("event type",typeof this.selectedFile,this.selectedFile);
 
-    const filePath = 'privateData/images/'+createId+'/'+createId;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, this.selectedFile);
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
 
-    // if (event.target.files && event.target.files[0]) {
-    //   var reader = new FileReader();
-    //
-    //   reader.readAsDataURL(event.target.files[0]); // read file as data url
-    //
-    //   reader.onload = (event) => { // called once readAsDataURL is completed
-    //     this.url = event.target.result;
-    //   }
-    // }
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = event.target.result;
+      }
+    }
+
+    // this.AnimalsServcice.pushDataToFireStorage(event,"abcd12345");
+    // this.AnimalsServcice.onUploadData(,event);
+    // const createId = Math.floor(Math.random() * 1000000);
+    // console.log("event type",typeof this.selectedFile,this.selectedFile);
+
+    // const filePath = 'privateData/images/'+createId+'/'+createId;
+    // const fileRef = this.storage.ref(filePath);
+    // const task = this.storage.upload(filePath, this.selectedFile);
 
 
     // this.showProgressbar = true;
@@ -90,10 +93,4 @@ export class AddItemComponent implements OnInit {
     //     }
     //   })
   }
-
-
-    // console.log(this.downloadURL);
-
-
-
 }

@@ -25,7 +25,6 @@ export class AnimalsListComponent implements OnInit, OnDestroy {
       this.animalsList = list;
     })
     this.animalsService.fetchAvailableList();
-    console.log(this.animalsList);
 
   }
   ngOnDestroy() {
