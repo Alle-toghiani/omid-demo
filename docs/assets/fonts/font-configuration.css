@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "iran-sans";
+  src: url("src/assets/fonts/Iranian_Sans.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: 'Vazir';
+  src: url('src/assets/fonts/vazir-font-v26.0.2/Vazir.eot');
+  src: local('☺'),
+  url('src/assets/fonts/vazir-font-v26.0.2/Vazir.woff') format('woff'),
+  url('src/assets/fonts/vazir-font-v26.0.2/Vazir.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Vazir-Black';
+  src: url('src/assets/fonts/vazir-font-v26.0.2/Vazir-Black.eot');
+  src: local('☺'),
+  url('src/assets/fonts/vazir-font-v26.0.2/Vazir-Black.woff') format('woff'),
+  url('src/assets/fonts/vazir-font-v26.0.2/Vazir-Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Vazir-Bold';
+  src: url('src/assets/fonts/vazir-font-v26.0.2/Vazir-Bold.eot');
+  src: local('☺'),
+  url('src/assets/fonts/vazir-font-v26.0.2/Vazir-Bold.woff') format('woff'),
+  url('src/assets/fonts/vazir-font-v26.0.2/Vazir-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Vazir-Light';
+  src: url('src/assets/fonts/vazir-font-v26.0.2/Vazir-Light.eot');
+  src: local('☺'),
+  url('src/assets/fonts/vazir-font-v26.0.2/Vazir-Light.woff') format('woff'),
+  url('src/assets/fonts/vazir-font-v26.0.2/Vazir-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Vazir-Medium';
+  src: url('src/assets/fonts/vazir-font-v26.0.2/Vazir-Medium.eot');
+  src: local('☺'),
+  url('src/assets/fonts/vazir-font-v26.0.2/Vazir-Medium.woff') format('woff'),
+  url('src/assets/fonts/vazir-font-v26.0.2/Vazir-Medium.ttf') format('truetype');
+}
