@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <div class="outer-container">
+<!--  <div class="outer-container">-->
     <div class="nav-container">
       <div fxHide fxLayoutAlign="center" style=" padding-top: 2em">
         <img
@@ -8,32 +8,32 @@
           alt="Omid organization logo"
           style=" height: 40px;">
       </div>
-      <div fxHide.gt-sm  fxLayout="row" fxLayoutAlign="space-between">
-        <div>
+      <div fxHide.gt-sm  fxLayout="row" fxLayoutAlign="space-between" class="medium__container">
+        <div class="medium__item">
           <button mat-icon-button (click)="onToggle()">
             <mat-icon color="accent">menu</mat-icon>
           </button>
-        </div>
-        <div fxFlexAlign="center center">
           <img
+            fxHide.lt-sm
             class="header__logo"
             src="../../../assets/img/logo/omid-animal-logo300-70.png"
             alt="Omid organization logo"
             style=" height: 40px;">
-        </div>
-
-        <div fxHide.lt-sm fxLayoutGap="5px">
+          <img
+            fxHide.gt-xs
+            class="header__logo"
+            src="../../../assets/img/logo/logo-sm.png"
+            alt="Omid organization logo"
+            style=" height: 40px;">
           <button
+            fxHide.lt-sm
             *ngIf="!authStatus"
             mat-raised-button
             routerLink="/login"
-            fxFlexAlign="center"
-            style="height: fit-content"
-            color="accent"
-          >ورود کاربران</button>
-          <button *ngIf="authStatus" (click)="onLogOut()" mat-stroked-button  fxFlexAlign="center" style="height: fit-content">خروج</button>
+            color="accent">
+            ورود کاربران</button>
+          <button *ngIf="authStatus" (click)="onLogOut()" mat-stroked-button >خروج</button>
         </div>
-
       </div>
 
       <div fxHide.lt-md class="header__navbar">
@@ -63,7 +63,7 @@
             <a href="#" class="header__menu-btn">ارتباط با ما</a>
           </li>
         </ul>
-        <div fxHide.lt-md fxFlex fxLayoutAlign="end" fxLayoutGap="5px">
+        <div fxHide.lt-md fxFlex fxLayoutAlign="end" fxLayoutGap="5px" style="padding-left:1em;">
           <button
             *ngIf="!authStatus"
             mat-raised-button
@@ -77,5 +77,5 @@
       </div>
 
     </div>
-  </div>
+<!--  </div>-->
 </mat-toolbar>

@@ -1,32 +1,40 @@
 $color-primary: #fdfbf7;
 $color-dark-brown: #3e1908;
 $color-light-brown: #ca7c62;
-
+@import 'responsive.mixin';
 * {
   box-sizing: border-box;
 }
 
-.outer-container{
+//.outer-container{
+//  width: 100%;
+//  //background-color: #fdfbf7;
+//background-color: #563A3D;
+//  &::-webkit-scrollbar{
+//    display: none;
+//  }
+//}
+//
+//.content-container{
+//  background-color: blue;
+//
+//  max-width: 1440px;
+//  width: 97%;
+//  overflow: hidden;
+//}
+
+.outer_container{
   width: 100%;
-  background-color: #fdfbf7;
-  &::-webkit-scrollbar{
-    display: none;
-  }
-}
-
-.content-container{
   max-width: 1440px;
-  width: 97%;
-}
-
-h1,p{
-  color:#563A3D;
-}
-
-.viewer {
+  background-color: darkgrey;
   margin-left: auto;
   margin-right: auto;
-  width: 100vw;
+}
+.viewer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  //background-color: red;
   height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -36,18 +44,45 @@ h1,p{
   }
 }
 
-.slide {
+.section {
+  position: relative;
   width: 100vw;
   height: 100vh;
+  margin:0;
   overflow-x: hidden;
   padding: 1em;
   color: white;
   scroll-snap-align: start;
   scroll-snap-stop: normal;
+  display: flex;
+  flex-direction: row;
+  //background-color: red;
+
+  &__blob {
+    position: absolute;
+    bottom:0;
+    left: 15em;
+    fill: $color-light-brown;
+    width: 10em;
+    animation: move 10s ease-in-out infinite;
+    transform-origin: 50% 50%;
+  }
+
+  &__text{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  &__header{
+    color:#563A3D;
+    font-weight: bold;
+    font-size: 4em;
+    line-height: 1.2em;
+  }
 }
 
-.slide:nth-child(1) {
-  background-color: $color-primary;
+.section:nth-child(1) {
+  //background-color: $color-primary;
   display: flex;
   position: relative;
     img{
@@ -74,27 +109,19 @@ h1,p{
     }
 }
 
-.slide:nth-child(2) {
+.section:nth-child(2) {
   background-color: $color-light-brown;
 }
 
-.slide:nth-child(3) {
+.section:nth-child(3) {
   background-color: $color-dark-brown;
 }
 
-.slide:nth-child(4) {
+.section:nth-child(4) {
 
 }
 
-.blob {
-  position: absolute;
-  bottom:0;
-  left: 15em;
-  fill: $color-light-brown;
-  width: 10em;
-  animation: move 10s ease-in-out infinite;
-  transform-origin: 50% 50%;
-}
+
 
 @keyframes move {
   0%   { transform: scale(0.7)  }

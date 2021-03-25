@@ -3,7 +3,7 @@
   <div class="sideNav-container" fxHide.lt-md >
     <div class="sideNav-sort">
       <h3>ترتیب نمایش</h3>
-      <mat-button-toggle-group #group="matButtonToggleGroup">
+      <mat-button-toggle-group  #group="matButtonToggleGroup">
         <mat-button-toggle value="ascending ">
           <span>صعودی  </span>
           <i class="fas fa-sort-amount-down-alt"></i>
@@ -28,15 +28,15 @@
   </div>
 
   <div class="list__container">
-    <div class="list__actions" fxHide.gt-sm >
-<!--        <a class="list__actions&#45;&#45;action" (click)="openDialog()" >-->
-<!--          <mat-icon>add</mat-icon>-->
-<!--          <span>افزودن آیتم جدید</span>-->
-<!--        </a>-->
+    <div
+      fxHide.gt-sm
+      class="list__actions"
+      *ngIf="isAuth" >
+
       <button
         mat-stroked-button
-        class="list__actions--action"
         color="primary"
+        class="list__actions--action"
         (click)="openDialog()">
         <mat-icon>add</mat-icon>
         افزودن آیتم جدید
@@ -49,50 +49,61 @@
         <mat-icon>filter_alt</mat-icon>
         فیلتر و جستوجو
       </button>
-<!--        <a class="list__actions&#45;&#45;action" (click)="openDialog()" >-->
-<!--          <mat-icon>filter_alt</mat-icon>-->
-<!--          <span>فیلتر و ترتیب</span>-->
-<!--        </a>-->
-    </div>
-  <div class="item__container">
-    <div *ngFor="let item of animalsList " class="item" fxHide.gt-xs>
-      <div class="item__image">
-        <img [src]="item.imageAddress" alt="Photo of a Shiba Inu" class="item__image">
-      </div>
-      <div class="item__details">
-        <span *ngIf="item.name"><strong>اسم: </strong>{{item.name}}  </span>
-        <span> <strong>نژاد: </strong>{{item.breed}}  </span>
-        <span><strong>سن: </strong>{{item.birthDate | datetostring}}  </span>
-        <span *ngIf="item.vaccination"> <strong>واکسیناسیون:</strong> <mat-icon>check</mat-icon></span>
-        <span *ngIf="!item.vaccination"> <strong>واکسیناسیون:</strong><mat-icon>close</mat-icon></span>
-      </div>
-      <div class="item__actions">
-        <button mat-stroked-button color="warn">حذف</button>
-        <button mat-stroked-button color="primary">سرپرستی</button>
-      </div>
     </div>
 
+    <div class="loadingScreen" *ngIf="isLoading">
+      <mat-spinner color="accent" ></mat-spinner>
+    </div>
 
+  <div class="item__container" *ngIf="!isLoading">
 
-    <div  *ngFor="let item of animalsList " class="card" fxHide.lt-sm>
-      <mat-card class="example-card" >
-        <mat-card-header>
-          <mat-card-title>{{ item.breed }}</mat-card-title>
-          <mat-card-subtitle>{{item.gender}} </mat-card-subtitle>
+    <div
+      *ngFor="let item of mergedList "
+      class="card__container" >
+      <mat-card class="card" >
+        <div class="card__innerCon">
+        <mat-card-header class="card__header">
+          <mat-card-title class="card__title">
+            <span [title]=" item.gender==='male' ? 'مذکر' : 'مونث' " style="cursor: pointer">
+              <mat-icon *ngIf="item.gender === 'male'; else genderLF ">male</mat-icon>
+              <ng-template #genderLF>
+                <mat-icon>female</mat-icon>
+              </ng-template>
+            </span>
+            {{ item.breed }}
+          </mat-card-title>
+          <mat-card-subtitle class="card__subtitle">
+            {{item.name}}
+          </mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image [src]="item.imageAddress" alt="Photo of a Shiba Inu" class="card-image">
-        <mat-card-content>
+
+          <img mat-card-image
+               [src]="item.imageAddress ? item.imageAddress : '../../assets/pictures/picture-not-found.jpg'"
+               alt="Photo of a {{item.breed}} called {{item.name ? item.name : 'good boy'}}"
+               class="card__image">
+
+        <mat-card-content class="card__content">
+          <p>
+            {{item.description.slice(0,30) +( item.description.length>30? "..." : "")}}
+          </p>
         </mat-card-content>
-        <mat-card-actions>
+        <mat-card-actions class="card__actions">
           <button mat-raised-button color="warn">سرپرستی</button>
-          <button mat-button>SHARE</button>
+          <button
+            *ngIf="isAuth"
+            mat-stroked-button
+            color="warn"
+            (click)="onDeleteItem(item.id)">حذف</button>
         </mat-card-actions>
+        </div>
+
+
       </mat-card>
     </div>
   </div>
   </div>
-
-  <p fxHide.lt-md (click)="openDialog()">
+<div *ngIf="isAuth">
+  <p fxHide.lt-md (click)="openDialog()" >
     <span title="اضافه کردن آیتم جدید">
       <button
         class="outer-container__btn"
@@ -103,6 +114,7 @@
       </button>
     </span>
   </p>
+</div>
 
 </div>
 

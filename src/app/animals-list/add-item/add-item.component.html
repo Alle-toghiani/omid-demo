@@ -1,149 +1,205 @@
 <div class="addItem__container">
 
   <form
+    *ngIf="!isLoading"
     class="addItem__form"
     #f="ngForm"
-    (ngSubmit)="onSubmit(f)"
-  >
-<div class="addItem__outCon">
+    (ngSubmit)="onSubmit(f)">
 
-    <div class="addItem__inCon">
-      <p>
-        <mat-radio-group
-          aria-labelledby="radio__label"
-          class="radio__group"
-          required
-          ngModel
-          name="form_breed">
-          <label id="radio__label">جنسیت:</label>
-          <mat-radio-button class="radio__button" value="male">مذکر</mat-radio-button>
-          <mat-radio-button class="radio__button" value="female">مونث</mat-radio-button>
-        </mat-radio-group>
-      </p>
-      <p>
-        <mat-form-field
-          appearance="outline"
-          class="formField">
-          <mat-label>نژاد حیوان</mat-label>
-          <input type="text"
-                 matInput
-                 placeholder="نژاد"
-                 ngModel
-                 name="breed"
-                 #breedInput="ngModel"
-                 required >
-          <mat-error *ngIf="breedInput.hasError('required')">ورود نژاد الزامی است</mat-error>
-          <mat-error *ngIf="!breedInput.hasError('required')">نژاد نامتعبر است</mat-error>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field
-          appearance="outline"
-          class="formField">
-          <mat-label>اسم (اختیاری)</mat-label>
-          <input type="text"
-                 matInput
-                 placeholder="اسم"
-                 ngModel
-                 name="name"
-                 #nameInput="ngModel" >
-          <mat-error *ngIf="breedInput.hasError('required')">ورود نام الزامی است</mat-error>
-          <mat-error *ngIf="!breedInput.hasError('required')">نام نامتعبر است</mat-error>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-checkbox
-          name="vaccination"
-          ngModel
-          style="padding: 5px 0;">واکسیناسیون</mat-checkbox>
-      </p>
-      <fieldset
-        class="addItem__ageField"
-        fxLayoutAlign="row"
-        fxLayoutGap="20px">
 
-        <legend>تعیین سن</legend>
+    <div class="addItem__outCon">
 
-        <mat-form-field class="formField--date">
-          <mat-label>روز</mat-label>
-          <input
-            type="number"
-            matInput
-            placeholder="روز"
+      <div class="addItem__inCon">
+
+
+        <p>
+          <mat-radio-group
+            aria-labelledby="radio__label"
+            class="radio__group"
+            required
             ngModel
-            name="age_day"
-            #age_day="ngModel"
-            min="0"
-            max="30" >
-        </mat-form-field>
+            name="gender">
+            <label id="radio__label">جنسیت:</label>
+            <mat-radio-button class="radio__button" value="male">مذکر</mat-radio-button>
+            <mat-radio-button class="radio__button" value="female">مونث</mat-radio-button>
+          </mat-radio-group>
+        </p>
+        <p>
+          <mat-form-field >
+            <mat-label>نژاد</mat-label>
+            <input type="text" matInput [formControl]="breed_Control" [matAutocomplete]="auto" maxlength="50">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+              <mat-option *ngFor="let option of breed_filteredOptions | async" [value]="option" (onSelectionChange)="onBreedSelectOption(option)">
+                {{option.fa}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </p>
 
-        <mat-form-field class="formField--date">
-          <mat-label>ماه</mat-label>
-          <input maxlength="20px"
-                 type="number"
-                 matInput
-                 placeholder="ماه"
-                 ngModel
-                 name="age_month"
-                 #age_month="ngModel"
-                 min="0"
-                 max="12"
-                 required >
-        </mat-form-field>
+<!--        <p>-->
+<!--          <mat-form-field-->
+<!--            appearance="outline"-->
+<!--            class="formField">-->
+<!--            <mat-label>نژاد حیوان</mat-label>-->
+<!--            <input type="text"-->
+<!--                   matInput-->
+<!--                   placeholder="نژاد"-->
+<!--                   ngModel-->
+<!--                   name="breed"-->
+<!--                   #breedInput="ngModel"-->
+<!--                   required>-->
+<!--&lt;!&ndash;                   [formControl]="breed_Control"&ndash;&gt;-->
+<!--&lt;!&ndash;                   [matAutocomplete]="auto">&ndash;&gt;-->
 
-        <mat-form-field class="formField--date">
-          <mat-label>سال</mat-label>
-          <input
-            type="number"
-            matInput
-            placeholder="سال"
+<!--&lt;!&ndash;            <input type="text"&ndash;&gt;-->
+<!--&lt;!&ndash;                   matInput &ndash;&gt;-->
+<!--&lt;!&ndash;                   [formControl]="breed_Control" &ndash;&gt;-->
+<!--&lt;!&ndash;                   [matAutocomplete]="auto"&ndash;&gt;-->
+<!--&lt;!&ndash;                   ngModel&ndash;&gt;-->
+<!--&lt;!&ndash;                   required&ndash;&gt;-->
+<!--&lt;!&ndash;                   name="breed"&ndash;&gt;-->
+<!--&lt;!&ndash;                   #breedInput="ngModel">&ndash;&gt;-->
+<!--            <mat-error *ngIf="breedInput.hasError('required')">ورود نژاد الزامی است</mat-error>-->
+<!--            <mat-error *ngIf="!breedInput.hasError('required')">نژاد نامتعبر است</mat-error>-->
+<!--          </mat-form-field>-->
+<!--        </p>-->
+        <p>
+          <mat-form-field
+            appearance="outline"
+            class="formField">
+            <mat-label>اسم (اختیاری)</mat-label>
+            <input type="text"
+                   matInput
+                   placeholder="اسم"
+                   ngModel
+                   name="name"
+                   maxlength="50"
+                   #nameInput="ngModel" >
+            <mat-error *ngIf="nameInput.hasError('required')">ورود نام الزامی است</mat-error>
+            <mat-error *ngIf="!nameInput.hasError('required')">نام نامتعبر است</mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-checkbox
+            name="vaccination"
             ngModel
-            name="age_year"
-            #age_year="ngModel"
-            min="0"
-            max="20"
-            required >
-        </mat-form-field>
-      </fieldset>
+            style="padding: 5px 0;">واکسیناسیون</mat-checkbox>
+        </p>
+        <fieldset
+          class="addItem__ageField"
+          fxLayoutAlign="row"
+          fxLayoutGap="20px">
+
+          <legend>تعیین سن</legend>
+
+          <mat-form-field class="formField--date">
+            <mat-label>روز</mat-label>
+            <input
+              type="number"
+              matInput
+              placeholder="روز"
+              ngModel
+              name="age_day"
+              #age_day="ngModel"
+              min="0"
+              max="30" >
+          </mat-form-field>
+
+          <mat-form-field class="formField--date">
+            <mat-label>ماه</mat-label>
+            <input maxlength="20px"
+                   type="number"
+                   matInput
+                   placeholder="ماه"
+                   ngModel
+                   name="age_month"
+                   #age_month="ngModel"
+                   min="0"
+                   max="12"
+                   required >
+          </mat-form-field>
+
+          <mat-form-field class="formField--date">
+            <mat-label>سال</mat-label>
+            <input
+              type="number"
+              matInput
+              placeholder="سال"
+              ngModel
+              name="age_year"
+              #age_year="ngModel"
+              min="0"
+              max="20"
+              required >
+          </mat-form-field>
+        </fieldset>
     </div>
 
-      <div  class="uploadImg">
-        <input
-          type="file"
-          accept="image/*"
-          (change)="onFileSelected($event)"
-          id="uploadImg__input"
-          hidden
-        >
-        <label
-          for="uploadImg__input"
-          class="uploadImg__label">
-          انتخاب تصویر
-          <mat-icon class="uploadImg__icon">cloud_upload</mat-icon>
-        </label>
-        <mat-progress-bar
-          *ngIf="showProgressbar"
-          class="uploadImg__progress"
-          mode="determinate" [value]="uploadPercent | async"></mat-progress-bar>
-        <div class="uploadImg__preview" *ngIf="url">
-          <img class="uploadImg__img" [src]="url">
-        </div>
-        <div style="width: 2em; height: 3em; background-color: red">sdfsdf</div>
-
+      <div class="column-left">
+        <div  class="uploadImg">
+          <input
+            type="file"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+            id="uploadImg__input"
+            hidden >
+          <label
+            for="uploadImg__input"
+            class="uploadImg__label">
+            انتخاب تصویر
+            <mat-icon class="uploadImg__icon">cloud_upload</mat-icon>
+          </label>
+          <mat-progress-bar
+            *ngIf="showProgressbar"
+            class="uploadImg__progress"
+            mode="determinate" [value]="uploadPercent"></mat-progress-bar>
+          <div class="uploadImg__preview" *ngIf="url">
+            <img class="uploadImg__img" [src]="url">
+          </div>
       </div>
-
-
+      </div>
 
 </div>
 
-      <button
+    <div class="description">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              توضیحات اضافی:
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-form-field style="width: 100%; height: 100%">
+              <textarea matInput
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="5"
+                        ngModel
+                        name="description"></textarea>
+          </mat-form-field>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <button
         mat-raised-button
         color="warn"
         type="submit"
         class="submit__btn"
-        [disabled]="f.invalid" >ثبت
-      </button>
+        name="submit_btn"
+        [disabled]="f.invalid || isPushing">
+        <span *ngIf="!isPushing">ثبت</span>
+        <mat-spinner
+          diameter="30"
+          color="accent"
+          class="submit__spinner" *ngIf="isPushing"></mat-spinner>
+    </button>
 
   </form>
+
+  <div class="loadingScreen" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
 
 </div>

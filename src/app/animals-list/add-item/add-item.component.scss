@@ -2,10 +2,12 @@
 
 .uploadImg{
   min-width: 8em;
+  height: 18.5em;
   margin:.5em;
   padding: .5em;
   position: relative;
   text-align: center;
+
 
 
 
@@ -104,8 +106,20 @@
   }
 }
 
-.submit__btn{
-  margin-top:1em;
-  width: 100px;
-  align-self: center;
+.submit{
+  &__btn {
+    margin-top: 1em;
+    width: 100px;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+  }
+  &__spinner{
+    width:5px;
+  }
 }
+
+
+

@@ -15,8 +15,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.authSubscription= this.authService.authChange.subscribe(
-      authstatus =>{
-        this.authStatus = authstatus;
+      user_state =>{
+        if ( user_state === 'admin' || user_state === 'user'){
+          this.authStatus = true;
+        } else if ( user_state == 'guest'){
+          this.authStatus = false;
+        }
       }
     )
   }

@@ -5,19 +5,22 @@ import { AngularFireAuth } from "@angular/fire/auth";
 
 import {UserModel} from "./user.model";
 import {AuthDataModel} from "./auth-data.model";
+import {AnimalsServcice} from "../animals-list/animals.servcice";
 
 @Injectable()
 
 export class AuthService {
 
   private user: UserModel;
-  authChange = new Subject<boolean>();
+  authChange = new Subject<any>();
   private isAuthenticated = false;
   private userId: string = null;
   private userObject: any;
   private ADMIN_UID: string = 'p35RHUxS6OdKaQoscad6TJEDrws1';
 
-  constructor(private router: Router, private afAuth: AngularFireAuth) {
+  constructor(
+    private router: Router,
+    private afAuth: AngularFireAuth) {
   }
 
 
@@ -52,6 +55,7 @@ export class AuthService {
   }
 
   login(authData: AuthDataModel) {
+
     const {email, password} = authData;
 
     this.afAuth.signInWithEmailAndPassword(
@@ -76,8 +80,13 @@ export class AuthService {
           case 'auth/wrong-password':
             alert('پسورد نامعتبر است')
             break;
-          default:
-            alert(error.message)
+          case 'auth/network-request-failed':
+            alert('با توجه به تحریم ایران توسط گوگل برای استفاده از سرویس های فایربیس می بایست آیپی خود را تغییر دهید ( استفاده از VPN / فیلتر شکن )')
+            break;
+          default:{
+            console.log("VPN error",error);
+            // alert(error + error.message);
+            }
             break;
         }
       });
@@ -85,20 +94,33 @@ export class AuthService {
   }
 
   logout() {
-    this.authChange.next(false);
-    this.router.navigate(['/login']);
-    this.isAuthenticated = false;
+    return this.afAuth.signOut()
+      .then( ()=> {
+        this.authChange.next('guest');
+
+        this.router.navigate(['/login']);
+        this.isAuthenticated = false;
+      })
+
     // this.afAuth.signOut();
 
   }
 
   isAuth() {
-    return this.isAuthenticated != null;
+    return this.isAuthenticated;
   }
 
   authSuccessfull() {
-    this.authChange.next(true);
-    this.router.navigate(['']);
+    this.isAuthenticated = true;
+    if ( !this.isAuth()){
+      this.authChange.next('guest');
+    }
+    else if ( this.isAuth() && this.userIsAdmin()){
+      this.authChange.next('admin');
+    } else if (this.isAuth() && !this.userIsAdmin()){
+      this.authChange.next('user');
+    }
+    this.router.navigate(['animals-list']);
   }
 
   getUserID() {

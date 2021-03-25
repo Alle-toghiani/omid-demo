@@ -18,6 +18,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule} from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import {AuthService} from "./auth/auth.service";
 import { SubheaderComponent } from './navigation/subheader/subheader.component';
@@ -26,6 +27,7 @@ import { AnimalComponent } from './animals-list/animal/animal.component';
 import { AnimalsServcice} from "./animals-list/animals.servcice";
 import { AddItemComponent } from './animals-list/add-item/add-item.component';
 import {UiService} from "./shared/ui.service";
+
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import {UiService} from "./shared/ui.service";
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
