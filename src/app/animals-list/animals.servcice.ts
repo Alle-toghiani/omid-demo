@@ -82,33 +82,31 @@ export class AnimalsServcice {
 
   fetchPublicData() {
     this.loadingDataSub.next(true);
-
-    // this.firestore.
-    // collection('publicData').
-    // snapshotChanges().pipe(
-    //   map(docArray => {
-    //     return docArray.map(doc => {
-    //       return {
-    //         id: doc.payload.doc.id,
-    //         name: doc.payload.doc.data()['name'],
-    //         breed: doc.payload.doc.data()['breed'].toString(),
-    //         gender: doc.payload.doc.data()['gender'],
-    //         birthDate: doc.payload.doc.data()['birthDate'],
-    //         description: doc.payload.doc.data()['description'],
-    //         imageAddress: doc.payload.doc.data()['imageAddress'],
-    //         vaccination: doc.payload.doc.data()['vaccination'],
-    //         dateAdded: doc.payload.doc.data()['dateAdded'],
-    //       }
-    //     })
-    //   })
-    // ).subscribe((animalsList: animalModel[]) => {
-    //   this.animalsList = animalsList;
-    //   console.log(this.animalsList);
-    //   this.publicDataSubject.next(this.animalsList);
-    // }, error => {
-    //   console.log(new Error("Error in fetching Public data: " + error))
-    // })
-    this.publicDataSubject.next(this.animalsList);
+    this.firestore.
+    collection('publicData').
+    snapshotChanges().pipe(
+      map(docArray => {
+        return docArray.map(doc => {
+          return {
+            id: doc.payload.doc.id,
+            name: doc.payload.doc.data()['name'],
+            breed: doc.payload.doc.data()['breed'].toString(),
+            gender: doc.payload.doc.data()['gender'],
+            birthDate: doc.payload.doc.data()['birthDate'],
+            description: doc.payload.doc.data()['description'],
+            imageAddress: doc.payload.doc.data()['imageAddress'],
+            vaccination: doc.payload.doc.data()['vaccination'],
+            dateAdded: doc.payload.doc.data()['dateAdded'],
+          }
+        })
+      })
+    ).subscribe((animalsList: animalModel[]) => {
+      this.animalsList = animalsList;
+      this.publicDataSubject.next(this.animalsList);
+    }, error => {
+      console.log(new Error("Error in fetching Public data: " + error))
+    })
+    // this.publicDataSubject.next(this.animalsList);
     this.loadingDataSub.next(false);
   }
 
