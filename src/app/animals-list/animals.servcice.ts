@@ -35,34 +35,7 @@ export class AnimalsServcice {
     )
   }
 
-  private animalsList: animalModel[] = [
-    {
-      "id": "CyhH1d8hRN19QrsGsDMT-",
-      "name": "بولت",
-      "breed": "bulldog",
-      "gender": "male",
-      "description": "دارای شناسنامه",
-      "vaccination": true
-    },
-    {
-      "id": "XXmv2qm4Sn0MZM68u4UNe",
-      "name": "شری",
-      "breed": "Golden Retriever",
-      "gender": "female",
-      "description": "دست آموز",
-      "imageAddress": "https://firebasestorage.googleapis.com/v0/b/omid-shelter.appspot.com/o/publicData%2Fimages%2FXXmv2qm4Sn0MZM68u4UNe%2FXXmv2qm4Sn0MZM68u4UNe?alt=media&token=e3c0eadc-a264-45c8-8806-9c85675c0d84",
-      "vaccination": true
-    },
-    {
-      "id": "gsYoieVSL-Yb5R4XyXPdm",
-      "name": "راسل",
-      "breed": "German Shepherd",
-      "gender": "male",
-      "description": "دارای شناسنامه و گذرنامه، تربیت شده و دارای شناسه الکترونیکی",
-      "imageAddress": "https://firebasestorage.googleapis.com/v0/b/omid-shelter.appspot.com/o/publicData%2Fimages%2FgsYoieVSL-Yb5R4XyXPdm%2FgsYoieVSL-Yb5R4XyXPdm?alt=media&token=1d40baa8-d096-4963-b2e9-0f775f9e3352",
-      "vaccination": true
-    }
-  ];
+  private animalsList: animalModel[] = [];
   private privateItems:number=0;
 
 
