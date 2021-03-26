@@ -27,6 +27,8 @@ import { AnimalComponent } from './animals-list/animal/animal.component';
 import { AnimalsServcice} from "./animals-list/animals.servcice";
 import { AddItemComponent } from './animals-list/add-item/add-item.component';
 import {UiService} from "./shared/ui.service";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageUnderConstructionComponent } from './page-under-construction/page-under-construction.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import {UiService} from "./shared/ui.service";
     AnimalsListComponent,
     AnimalComponent,
     AddItemComponent,
-    DateToStringPipe
+    DateToStringPipe,
+    PageNotFoundComponent,
+    PageUnderConstructionComponent
   ],
   imports: [
     FlexLayoutModule,

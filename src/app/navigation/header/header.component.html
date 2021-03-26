@@ -4,7 +4,7 @@
       <div fxHide fxLayoutAlign="center" style=" padding-top: 2em">
         <img
           class="header__logo"
-          src="../../../assets/img/logo/omid-animal-logo300-70.png"
+          src="assets/img/logo/omid-animal-logo300-70.png"
           alt="Omid organization logo"
           style=" height: 40px;">
       </div>
@@ -13,18 +13,24 @@
           <button mat-icon-button (click)="onToggle()">
             <mat-icon color="accent">menu</mat-icon>
           </button>
-          <img
-            fxHide.lt-sm
-            class="header__logo"
-            src="../../../assets/img/logo/omid-animal-logo300-70.png"
-            alt="Omid organization logo"
-            style=" height: 40px;">
-          <img
-            fxHide.gt-xs
-            class="header__logo"
-            src="../../../assets/img/logo/logo-sm.png"
-            alt="Omid organization logo"
-            style=" height: 40px;">
+          <div style="display: flex; cursor: pointer" routerLink="/">
+            <img
+              fxHide.lt-sm
+              class="header__logo"
+              src="assets/img/logo/omid-animal-logo300-70.png"
+              alt="Omid organization logo"
+              style=" height: 40px;">
+            <img
+              fxHide.gt-xs
+              class="header__logo"
+              src="../../../assets/img/logo/logo-sm.png"
+              alt="Omid organization logo"
+              style=" height: 40px;">
+          </div>
+
+<!--          </a>-->
+
+
           <button
             fxHide.lt-sm
             *ngIf="!authStatus"
@@ -46,24 +52,24 @@
 <!--            <mat-icon>list</mat-icon>-->
             <a class="header__menu-btn">لیست حیوانات</a>
           </li>
-          <li>
+          <li routerLink="/donation">
 <!--            <mat-icon>attach_money</mat-icon>-->
-            <a href="#" class="header__menu-btn">حمایت مالی</a>
+            <a  class="header__menu-btn">حمایت مالی</a>
           </li>
-          <li>
+          <li routerLink="/corporation">
 <!--            <mat-icon>groups</mat-icon>-->
-            <a href="#" class="header__menu-btn"> همکاری</a>
+            <a class="header__menu-btn"> همکاری</a>
           </li>
-          <li>
+          <li routerLink="/shop">
 <!--            <mat-icon>shopping_cart</mat-icon>-->
-            <a href="#" class="header__menu-btn">فروشگاه</a>
+            <a class="header__menu-btn">فروشگاه</a>
           </li>
-          <li>
+          <li routerLink="/contactUs">
 <!--            <mat-icon>place</mat-icon>-->
-            <a href="#" class="header__menu-btn">ارتباط با ما</a>
+            <a  class="header__menu-btn">ارتباط با ما</a>
           </li>
         </ul>
-        <div fxHide.lt-md fxFlex fxLayoutAlign="end" fxLayoutGap="5px" style="padding-left:1em;">
+        <div fxHide.lt-sm fxFlex fxLayoutAlign="end" fxLayoutGap="5px" style="padding-left:1em;">
           <button
             *ngIf="!authStatus"
             mat-raised-button

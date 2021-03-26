@@ -10,7 +10,7 @@ import {Subscription} from "rxjs";
 export class SidenavListComponent implements OnInit {
 @Output() closeSidenav = new EventEmitter<void>();
   authSubscription: Subscription;
-  authStatus : boolean;
+  authStatus : boolean = false;
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {

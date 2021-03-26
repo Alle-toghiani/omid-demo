@@ -46,14 +46,10 @@ export class AnimalsListComponent implements OnInit, OnDestroy {
       this.isAuth = true;
       if (authState === 'guest'){
         this.isAuth = true;
-        console.log("guest")
       }else if (authState === 'admin' || authState === 'user'){
         this.isAuth = true;
-        console.log("admin true")
       }
     })
-
-
     this.loadingDataSub = this.animalsService.loadingDataSub.subscribe(isLoading => {
         this.isLoading = isLoading;
       }
@@ -78,6 +74,7 @@ export class AnimalsListComponent implements OnInit, OnDestroy {
       const errorMessage = "هر کاربر حداکثر 5 آیتم شخصی می تواند اضافه کند";
       if (itemsNum < 3){
         const dialogRef = this.dialog.open(AddItemComponent)
+        // setInterval(()=>{this.dialog.closeAll()},5000)
       }else{
         this.uiService.showSnackbar(errorMessage,null,5000)
       }

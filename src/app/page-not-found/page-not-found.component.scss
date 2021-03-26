@@ -1,0 +1,21 @@
+.container{
+  &__outer{
+    width: 100%;
+    background-color: #fdfbf7;
+
+  }
+  &__inner{
+
+    max-width: 1440px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    height: 90vh;
+
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+}

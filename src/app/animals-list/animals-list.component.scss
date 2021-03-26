@@ -51,19 +51,19 @@ mat-icon{
       max-height: 200px;
       min-height: 200px;
     }
+    &__actions{
+      //background-color: #3f51b5;
+      position: absolute;
+      right:1em;
+      bottom: -0.5em;
+    }
+
   }
   mat-divider{
     margin-bottom:1em;
   }
 }
 
-@include screen('phone'){
-  .card{
-    &__image{
-
-    }
-  }
-}
 .list{
   &__actions{
     width: 100%;
@@ -139,30 +139,30 @@ mat-icon{
     flex-direction: column;
     margin-right:1.5em;
     width: 65%;
-    height: 9.5em;
+    height: fit-content;
+    padding-bottom: 1.5em;
     //max-height: 12em;
-    padding:.15em;
+    //padding:.15em;
     position: relative;
     //background-color: chartreuse;
   }
   &__actions{
     //background-color: #3f51b5;
     position: absolute;
-    left:1em;
-    bottom: -1em;
+    left:0.2em;
+    bottom: -1.6em;
   }
   &__header{
     margin:0;
   }
   &__content{
-
   }
   &__actions{
     align-self: flex-end;
   }
   &__image{
     order: 1;
-    height: 10em;
+    min-height: 50%;
     width: 50%;
     right: -55%;
     top:0;
