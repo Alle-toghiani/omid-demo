@@ -38,28 +38,31 @@ export class AnimalsServcice {
   // private animalsList: animalModel[] = [];
   private animalsList: animalModel[] = [{
     "id": "bFvHkUvn66DyGU16TQSuC",
-    "name": "shady",
+    "name": "oldest",
     "breed": "bulldog",
     "gender": "male",
     "description": "دست آموز و دارای  کارت سلامت کارت سلامت کارت سلامت کارت سلامت",
     "imageAddress": "https://firebasestorage.googleapis.com/v0/b/omid-shelter.appspot.com/o/publicData%2Fimages%2FbFvHkUvn66DyGU16TQSuC%2FbFvHkUvn66DyGU16TQSuC?alt=media&token=babf3ada-f358-44ea-bcef-2d0acc396c88",
-    "vaccination": true
+    "vaccination": true,
+    "dateAdded": new Date('1995-12-17T03:24:00')
   },{
     "id": "bFvHkUvn66DyGU16TQSuC",
-    "name": "shady",
+    "name": "older",
     "breed": "bulldog",
-    "gender": "male",
+    "gender": "female",
     "description": "دست آموز و دارای   کارت سلامت کارت سلامت کارت سلامت کارت سلامتکارت سلامت",
     "imageAddress": "https://firebasestorage.googleapis.com/v0/b/omid-shelter.appspot.com/o/publicData%2Fimages%2FbFvHkUvn66DyGU16TQSuC%2FbFvHkUvn66DyGU16TQSuC?alt=media&token=babf3ada-f358-44ea-bcef-2d0acc396c88",
-    "vaccination": true
+    "vaccination": false,
+    "dateAdded": new Date('2000-12-17T03:24:00')
   },{
     "id": "bFvHkUvn66DyGU16TQSuC",
-    "name": "shady",
+    "name": "old",
     "breed": "bulldog",
-    "gender": "male",
+    "gender": "female",
     "description": "دست آموز و دارای کارت سلامت",
     "imageAddress": "https://firebasestorage.googleapis.com/v0/b/omid-shelter.appspot.com/o/publicData%2Fimages%2FbFvHkUvn66DyGU16TQSuC%2FbFvHkUvn66DyGU16TQSuC?alt=media&token=babf3ada-f358-44ea-bcef-2d0acc396c88",
-    "vaccination": true
+    "vaccination": true,
+    "dateAdded": new Date('2020-12-17T03:24:00')
   }];
   private privateItems:number=0;
 
@@ -90,11 +93,11 @@ export class AnimalsServcice {
     //         name: doc.payload.doc.data()['name'],
     //         breed: doc.payload.doc.data()['breed'].toString(),
     //         gender: doc.payload.doc.data()['gender'],
-    //         birthDate: doc.payload.doc.data()['birthDate'],
+    //         birthDate:doc.payload.doc.data()['birthDate'].toDate(),
     //         description: doc.payload.doc.data()['description'],
     //         imageAddress: doc.payload.doc.data()['imageAddress'],
     //         vaccination: doc.payload.doc.data()['vaccination'],
-    //         dateAdded: doc.payload.doc.data()['dateAdded'],
+    //         dateAdded:doc.payload.doc.data()['dateAdded'].toDate(),
     //       }
     //     })
     //   })
@@ -141,15 +144,21 @@ export class AnimalsServcice {
 
 
   async onUploadData( animalModel: animalModel, fileRef){
-    this.pushingDataSub.next(true);
-    let model : animalModel = animalModel;
-    const generatedID = nanoid();
-    const downloadURL = await this.pushDataToFireStorage(fileRef,generatedID);
+    if (this.getNumberOfPrivateItems() < 3){
+      this.pushingDataSub.next(true);
+      let model : animalModel = animalModel;
+      const generatedID = nanoid();
+      const downloadURL = await this.pushDataToFireStorage(fileRef,generatedID);
 
-    model.imageAddress =  downloadURL.toString();
+      model.imageAddress =  downloadURL.toString();
 
-    this.pushDataToCloudFireStore(model, generatedID);
-    this.pushingDataSub.next(false);
+      this.pushDataToCloudFireStore(model, generatedID);
+      this.pushingDataSub.next(false);
+
+    } else{
+      throw (Error("Each user can only upload 3 private items"));
+    }
+
 
   }
 

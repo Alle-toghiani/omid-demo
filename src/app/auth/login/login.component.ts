@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   isLoading: boolean = false;
   user : AuthDataModel;
+  hide : boolean = true;
 
   constructor(
     private authService:AuthService,

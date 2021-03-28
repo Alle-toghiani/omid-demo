@@ -1,0 +1,65 @@
+<div class="sideNav-container">
+  <div class="sideNav-sort">
+    <h3>ترتیب نمایش</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>بر اساس</mat-label>
+      <mat-select (selectionChange)="onSetBasedOn($event)">
+        <mat-option value="birthDate">سن</mat-option>
+        <mat-option value="dateAdded">تاریخ اضافه شدن</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-button-toggle-group (change)="onSetOrder($event)" #group="matButtonToggleGroup">
+      <mat-button-toggle value='false'>
+        <span>صعودی  </span>
+        <i class="fas fa-sort-amount-down-alt"></i>
+      </mat-button-toggle>
+      <mat-button-toggle value='true'>
+        <span>نزولی  </span>
+        <i class="fas fa-sort-amount-down"></i>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <br>
+    <br>
+
+
+
+    <mat-divider></mat-divider>
+    <h3>فیلتر نتایج</h3>
+    <mat-accordion multi>
+      <mat-expansion-panel [disabled]="!checkedGender">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-checkbox
+              name="gender"
+              value="male"
+              (change)=" !checkedGender ? onFilterChange('RemoveFilter',$event) : onFilterChange('AddFilter',$event)"
+              [(ngModel)]="checkedGender">جنسیت</mat-checkbox>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-button-toggle-group name="gender" value="male" (change)="onFilterChange('EditFilter',$event)">
+          <mat-button-toggle value="male" >مذکر</mat-button-toggle>
+          <mat-button-toggle value="female" >مونث</mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-expansion-panel>
+
+<!--    <mat-accordion>-->
+      <mat-expansion-panel [disabled]="!checkedVac" >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-checkbox
+              name="vaccination"
+              [value]="true"
+              (change)=" !checkedVac ? onFilterChange('RemoveFilter',$event) : onFilterChange('AddFilter',$event)"
+              [(ngModel)]="checkedVac">واکسیناسیون</mat-checkbox>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-button-toggle-group name="vaccination" [value]="true" (change)="onFilterChange('EditFilter',$event)">
+          <mat-button-toggle [value]="true" >دارد</mat-button-toggle>
+          <mat-button-toggle [value]="false" >ندارد</mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+<!--    </mat-accordion>-->
+
+  </div>
+</div>

@@ -29,6 +29,7 @@ import { AddItemComponent } from './animals-list/add-item/add-item.component';
 import {UiService} from "./shared/ui.service";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PageUnderConstructionComponent } from './page-under-construction/page-under-construction.component';
+import { FilterSortComponent } from './animals-list/filter-sort/filter-sort.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { PageUnderConstructionComponent } from './page-under-construction/page-u
     AddItemComponent,
     DateToStringPipe,
     PageNotFoundComponent,
-    PageUnderConstructionComponent
+    PageUnderConstructionComponent,
+    FilterSortComponent
   ],
   imports: [
     FlexLayoutModule,

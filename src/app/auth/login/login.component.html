@@ -22,7 +22,7 @@
         <mat-error *ngIf="!emailInput.hasError('required')">ایمیل نامتعبر است</mat-error>
       </mat-form-field>
       <mat-form-field hintLabel="حداقل 6 کاراکتر">
-        <input type="password"
+        <input [type]="hide ? 'password' : 'text'"
                matInput
                placeholder="رمز عبور"
                ngModel
@@ -30,6 +30,9 @@
                minlength="6"
                #pwInput="ngModel"
                required >
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
         <mat-hint align="end">{{pwInput.value?.length}}/6</mat-hint>
       </mat-form-field>
 

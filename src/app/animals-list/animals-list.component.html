@@ -1,43 +1,17 @@
 <div class="outer-container">
-
-  <div class="sideNav-container" fxHide.lt-md >
-    <div class="sideNav-sort">
-      <h3>ترتیب نمایش</h3>
-      <mat-button-toggle-group  #group="matButtonToggleGroup">
-        <mat-button-toggle value="ascending ">
-          <span>صعودی  </span>
-          <i class="fas fa-sort-amount-down-alt"></i>
-        </mat-button-toggle>
-        <mat-button-toggle value="descending">
-          <span>نزولی  </span>
-          <i class="fas fa-sort-amount-down"></i>
-        </mat-button-toggle>
-      </mat-button-toggle-group>
-      <br>
-      <br>
-        <mat-form-field appearance="fill">
-          <mat-label>بر اساس</mat-label>
-          <mat-select>
-            <mat-option value="age">سن</mat-option>
-            <mat-option value="option">زمان</mat-option>
-          </mat-select>
-        </mat-form-field>
-      <mat-divider></mat-divider>
-      <h3>فیلتر نتایج</h3>
-    </div>
-  </div>
+  <app-filter-sort  fxHide.lt-md
+                    (sortEventEmitter)="onFilter($event)" (filterEventEmitter)="flexFilter($event)" ></app-filter-sort>
 
   <div class="list__container">
     <div
       fxHide.gt-sm
-      class="list__actions"
-      *ngIf="isAuth" >
-
+      class="list__actions">
+<!--      *ngIf="isAuth"-->
       <button
         mat-stroked-button
         color="primary"
         class="list__actions--action"
-        (click)="openDialog()">
+        (click)="openAddItemDialog()">
         <mat-icon>add</mat-icon>
         افزودن آیتم جدید
       </button>
@@ -45,7 +19,7 @@
         mat-stroked-button
         class="list__actions--action"
         color="primary"
-        (click)="openDialog()">
+        (click)="openFilterSortDialog()">
         <mat-icon>filter_alt</mat-icon>
         فیلتر و جستوجو
       </button>
@@ -73,7 +47,7 @@
             {{ item.breed }}
           </mat-card-title>
           <mat-card-subtitle class="card__subtitle">
-            {{item.name}}
+            {{item.dateAdded | date}}
           </mat-card-subtitle>
         </mat-card-header>
 
@@ -83,9 +57,10 @@
                class="card__image">
 
         <mat-card-content class="card__content">
-          <p>
-            {{item.description.slice(0,29) +( item.description.length>30? "..." : "")}}
-          </p>
+<!--          <p>-->
+<!--            {{item.description.slice(0,29) +( item.description.length>30? "..." : "")}}-->
+<!--          </p>-->
+          <p>{{item.dateAdded | datetostring}}</p>
         </mat-card-content>
         <mat-card-actions class="card__actions">
           <button mat-raised-button color="warn">سرپرستی</button>
