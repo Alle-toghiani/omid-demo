@@ -33,7 +33,6 @@ export class FilterSortComponent implements OnInit {
   }
 
   onFilterChange(action:string,event){
-
     switch (action) {
       case "RemoveFilter": {
         //Remove Filter
@@ -65,15 +64,13 @@ export class FilterSortComponent implements OnInit {
       }
         break;
       default : {
-        console.log("default");
+        throw (Error("Exception in FlexFilter function, check default"))
       }
     }
-    //
   }
 
   onToggle(){
-    console.log("*")
-    // this.checkedGender = !this.checkedGender;
+    this.checkedGender = !this.checkedGender;
   }
 
 

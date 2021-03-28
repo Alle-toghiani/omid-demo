@@ -35,35 +35,35 @@ export class AnimalsServcice {
     )
   }
 
-  // private animalsList: animalModel[] = [];
-  private animalsList: animalModel[] = [{
-    "id": "bFvHkUvn66DyGU16TQSuC",
-    "name": "oldest",
-    "breed": "bulldog",
-    "gender": "male",
-    "description": "دست آموز و دارای  کارت سلامت کارت سلامت کارت سلامت کارت سلامت",
-    "imageAddress": "https://firebasestorage.googleapis.com/v0/b/omid-shelter.appspot.com/o/publicData%2Fimages%2FbFvHkUvn66DyGU16TQSuC%2FbFvHkUvn66DyGU16TQSuC?alt=media&token=babf3ada-f358-44ea-bcef-2d0acc396c88",
-    "vaccination": true,
-    "dateAdded": new Date('1995-12-17T03:24:00')
-  },{
-    "id": "bFvHkUvn66DyGU16TQSuC",
-    "name": "older",
-    "breed": "bulldog",
-    "gender": "female",
-    "description": "دست آموز و دارای   کارت سلامت کارت سلامت کارت سلامت کارت سلامتکارت سلامت",
-    "imageAddress": "https://firebasestorage.googleapis.com/v0/b/omid-shelter.appspot.com/o/publicData%2Fimages%2FbFvHkUvn66DyGU16TQSuC%2FbFvHkUvn66DyGU16TQSuC?alt=media&token=babf3ada-f358-44ea-bcef-2d0acc396c88",
-    "vaccination": false,
-    "dateAdded": new Date('2000-12-17T03:24:00')
-  },{
-    "id": "bFvHkUvn66DyGU16TQSuC",
-    "name": "old",
-    "breed": "bulldog",
-    "gender": "female",
-    "description": "دست آموز و دارای کارت سلامت",
-    "imageAddress": "https://firebasestorage.googleapis.com/v0/b/omid-shelter.appspot.com/o/publicData%2Fimages%2FbFvHkUvn66DyGU16TQSuC%2FbFvHkUvn66DyGU16TQSuC?alt=media&token=babf3ada-f358-44ea-bcef-2d0acc396c88",
-    "vaccination": true,
-    "dateAdded": new Date('2020-12-17T03:24:00')
-  }];
+  private animalsList: animalModel[] = [];
+  // private animalsList: animalModel[] = [{
+  //   "id": "bFvHkUvn66DyGU16TQSuC",
+  //   "name": "oldest",
+  //   "breed": "bulldog",
+  //   "gender": "male",
+  //   "description": "دست آموز و دارای  کارت سلامت کارت سلامت کارت سلامت کارت سلامت",
+  //   "imageAddress": "https://firebasestorage.googleapis.com/v0/b/omid-shelter.appspot.com/o/publicData%2Fimages%2FbFvHkUvn66DyGU16TQSuC%2FbFvHkUvn66DyGU16TQSuC?alt=media&token=babf3ada-f358-44ea-bcef-2d0acc396c88",
+  //   "vaccination": true,
+  //   "dateAdded": new Date('1995-12-17T03:24:00')
+  // },{
+  //   "id": "bFvHkUvn66DyGU16TQSuC",
+  //   "name": "older",
+  //   "breed": "bulldog",
+  //   "gender": "female",
+  //   "description": "دست آموز و دارای   کارت سلامت کارت سلامت کارت سلامت کارت سلامتکارت سلامت",
+  //   "imageAddress": "https://firebasestorage.googleapis.com/v0/b/omid-shelter.appspot.com/o/publicData%2Fimages%2FbFvHkUvn66DyGU16TQSuC%2FbFvHkUvn66DyGU16TQSuC?alt=media&token=babf3ada-f358-44ea-bcef-2d0acc396c88",
+  //   "vaccination": false,
+  //   "dateAdded": new Date('2000-12-17T03:24:00')
+  // },{
+  //   "id": "bFvHkUvn66DyGU16TQSuC",
+  //   "name": "old",
+  //   "breed": "bulldog",
+  //   "gender": "female",
+  //   "description": "دست آموز و دارای کارت سلامت",
+  //   "imageAddress": "https://firebasestorage.googleapis.com/v0/b/omid-shelter.appspot.com/o/publicData%2Fimages%2FbFvHkUvn66DyGU16TQSuC%2FbFvHkUvn66DyGU16TQSuC?alt=media&token=babf3ada-f358-44ea-bcef-2d0acc396c88",
+  //   "vaccination": true,
+  //   "dateAdded": new Date('2020-12-17T03:24:00')
+  // }];
   private privateItems:number=0;
 
 
@@ -83,31 +83,31 @@ export class AnimalsServcice {
 
   fetchPublicData() {
     this.loadingDataSub.next(true);
-    // this.firestore.
-    // collection('publicData').
-    // snapshotChanges().pipe(
-    //   map(docArray => {
-    //     return docArray.map(doc => {
-    //       return {
-    //         id: doc.payload.doc.id,
-    //         name: doc.payload.doc.data()['name'],
-    //         breed: doc.payload.doc.data()['breed'].toString(),
-    //         gender: doc.payload.doc.data()['gender'],
-    //         birthDate:doc.payload.doc.data()['birthDate'].toDate(),
-    //         description: doc.payload.doc.data()['description'],
-    //         imageAddress: doc.payload.doc.data()['imageAddress'],
-    //         vaccination: doc.payload.doc.data()['vaccination'],
-    //         dateAdded:doc.payload.doc.data()['dateAdded'].toDate(),
-    //       }
-    //     })
-    //   })
-    // ).subscribe((animalsList: animalModel[]) => {
-    //   this.animalsList = animalsList;
-    //   console.log("object",animalsList);
-    //   this.publicDataSubject.next(this.animalsList);
-    // }, error => {
-    //   console.log(new Error("Error in fetching Public data: " + error))
-    // })
+    this.firestore.
+    collection('publicData').
+    snapshotChanges().pipe(
+      map(docArray => {
+        return docArray.map(doc => {
+          return {
+            id: doc.payload.doc.id,
+            name: doc.payload.doc.data()['name'],
+            breed: doc.payload.doc.data()['breed'].toString(),
+            gender: doc.payload.doc.data()['gender'],
+            birthDate:doc.payload.doc.data()['birthDate'].toDate(),
+            description: doc.payload.doc.data()['description'],
+            imageAddress: doc.payload.doc.data()['imageAddress'],
+            vaccination: doc.payload.doc.data()['vaccination'],
+            dateAdded:doc.payload.doc.data()['dateAdded'].toDate(),
+          }
+        })
+      })
+    ).subscribe((animalsList: animalModel[]) => {
+      this.animalsList = animalsList;
+      console.log("object",animalsList);
+      this.publicDataSubject.next(this.animalsList);
+    }, error => {
+      console.log(new Error("Error in fetching Public data: " + error))
+    })
     this.publicDataSubject.next(this.animalsList);
     this.loadingDataSub.next(false);
   }
@@ -245,5 +245,7 @@ export class AnimalsServcice {
   ngOnDestroy(){
     this.userStateChanged.unsubscribe();
   }
+
+
 
 }
